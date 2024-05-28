@@ -1,5 +1,5 @@
 ﻿namespace ForwardTestTask.Domain.Entities
 {
-    public record EditNoteModel(string Title, string Description);
+    public record EditNoteModel(Guid Guid, string Title, string Description);
 
 }

@@ -1,25 +1,40 @@
 ﻿using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
 
+using System.Reactive.Subjects;
+
 namespace ForwardTestTask.Domain.Repositories.Implementation
 {
     public class NoteRepository : INoteRepository
     {
-        public IObservable<IEnumerable<Note>> Notes => throw new NotImplementedException();
+        //можно выбрать и обычный list, но в связном списке будут быстрее производится операции удаления и добавления
+        private readonly LinkedList<Note> _notes = new();
+        private readonly BehaviorSubject<LinkedList<Note>> _notesBehaviorSubject = new([]);
 
-        public Task<bool> AddAsync(Note entity)
+        public IObservable<IEnumerable<Note>> Notes { get; }
+
+        public NoteRepository() => Notes = _notesBehaviorSubject;
+
+        public Task<bool> AddAsync(Note note)
         {
-            throw new NotImplementedException();
+            _notesBehaviorSubject.Value.AddLast(note);
+            return Task.FromResult(true);
         }
 
-        public Task<bool> DeleteAsync(Note entity)
+        public Task<bool> DeleteAsync(Guid guid)
         {
-            throw new NotImplementedException();
+            var note = _notesBehaviorSubject.Value.
+                Single(x => x.Guid == guid);
+            _notesBehaviorSubject.Value.Remove(note);
+            return Task.FromResult(true);
         }
 
-        public Task<bool> Edit(EditNoteModel entity)
+        public Task<bool> EditAsync(EditNoteModel editNoteModel)
         {
-            throw new NotImplementedException();
+            var note = _notesBehaviorSubject.Value
+                .Single(x => x.Guid == editNoteModel.Guid);
+            note.Edit(editNoteModel);
+            return Task.FromResult(true);
         }
     }
 }

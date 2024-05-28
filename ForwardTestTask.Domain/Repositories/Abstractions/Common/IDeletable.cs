@@ -1,6 +1,6 @@
 ﻿namespace ForwardTestTask.Domain.Repositories.Abstraction.Common
 {
-    public interface IDeletable<T> where T : class
+    public interface IDeletable<T>
     {
         Task<bool> DeleteAsync(T entity);
     }

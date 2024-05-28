@@ -2,6 +2,6 @@
 {
     public interface IEditable<T> where T : class
     {
-        Task<bool> Edit(T entity);
+        Task<bool> EditAsync(T entity);
     }
 }

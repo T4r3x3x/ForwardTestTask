@@ -1,25 +1,28 @@
 ﻿using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Entities;
+using ForwardTestTask.Domain.Repositories.Implementation;
 
 namespace ForwardTestTask.Core.Services.Implementations
 {
+    /// <summary>
+    /// По сути получился антипаттерн полтергейст, но это из-за того, что в приложении по сути нет никакой бизнес логики 
+    /// </summary>
     public class NoteService : INoteService
     {
-        public IObservable<IEnumerable<Note>> Notes => throw new NotImplementedException();
+        private readonly NoteRepository _noteRepository;
 
-        public Task<bool> AddAsync(Note entity)
+        public NoteService(NoteRepository noteRepository)
         {
-            throw new NotImplementedException();
+            _noteRepository = noteRepository;
+            Notes = _noteRepository.Notes;
         }
 
-        public Task<bool> DeleteAsync(Note entity)
-        {
-            throw new NotImplementedException();
-        }
+        public IObservable<IEnumerable<Note>> Notes { get; }
 
-        public Task<bool> Edit(EditNoteModel entity)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> AddAsync(Note note) => await _noteRepository.AddAsync(note);
+
+        public async Task<bool> DeleteAsync(Guid guid) => await _noteRepository.DeleteAsync(guid);
+
+        public async Task<bool> EditAsync(EditNoteModel editNoteModel) => await _noteRepository.EditAsync(editNoteModel);
     }
 }
