@@ -1,6 +1,6 @@
 ﻿namespace ForwardTestTask.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class NoteViewModel : ViewModelBase
 {
     public string Greeting => "Welcome to Avalonia!";
 }

@@ -8,5 +8,5 @@
         x:Class="ForwardTestTask.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="ForwardTestTask">
-        <views:MainView />
+        <views:NoteView />
 </Window>
