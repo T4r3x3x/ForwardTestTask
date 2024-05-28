@@ -7,9 +7,9 @@ using ReactiveUI;
 
 namespace ForwardTestTask.Views;
 
-public partial class MainView : ReactiveUserControl<NoteViewModel>
+public partial class NoteView : ReactiveUserControl<NoteViewModel>
 {
-    public MainView()
+    public NoteView()
     {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);

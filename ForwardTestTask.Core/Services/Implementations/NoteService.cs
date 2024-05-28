@@ -1,6 +1,7 @@
 ﻿using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Entities;
-using ForwardTestTask.Domain.Repositories.Implementation;
+using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
+using ForwardTestTask.Presentation.Models;
 
 namespace ForwardTestTask.Core.Services.Implementations
 {
@@ -9,9 +10,9 @@ namespace ForwardTestTask.Core.Services.Implementations
     /// </summary>
     public class NoteService : INoteService
     {
-        private readonly NoteRepository _noteRepository;
+        private readonly INoteRepository _noteRepository;
 
-        public NoteService(NoteRepository noteRepository)
+        public NoteService(INoteRepository noteRepository)
         {
             _noteRepository = noteRepository;
             Notes = _noteRepository.Notes;
@@ -19,7 +20,11 @@ namespace ForwardTestTask.Core.Services.Implementations
 
         public IObservable<IEnumerable<Note>> Notes { get; }
 
-        public async Task<bool> AddAsync(Note note) => await _noteRepository.AddAsync(note);
+        public async Task<bool> AddAsync(AddNoteModel addNoteModel)
+        {
+            var note = new Note(addNoteModel.Title, addNoteModel.Description);
+            return await _noteRepository.AddAsync(note);
+        }
 
         public async Task<bool> DeleteAsync(Guid guid) => await _noteRepository.DeleteAsync(guid);
 

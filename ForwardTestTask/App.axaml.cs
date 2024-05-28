@@ -1,7 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Autofac;
+
+using Avalonia;
 using Avalonia.Markup.Xaml;
 
+using ForwardTestTask.Presentation.Setup;
 using ForwardTestTask.ViewModels;
 using ForwardTestTask.Views;
 
@@ -16,21 +18,11 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new NoteViewModel()
-            };
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView
-            {
-                DataContext = new NoteViewModel()
-            };
-        }
-
+        var container = new ContainerBuilder()
+         .RegisterDepedencies()
+         .Build();
+        var wm = container.Resolve<NoteViewModel>();
+        new MainWindow { DataContext = wm }.Show();
         base.OnFrameworkInitializationCompleted();
     }
 }
