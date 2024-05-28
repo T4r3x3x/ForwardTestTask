@@ -25,7 +25,8 @@ namespace ForwardTestTask.Presentation.Setup
         internal static ContainerBuilder RegisterRepositories(this ContainerBuilder builder)
         {
             builder.RegisterType<NoteRepository>()
-                .As<INoteRepository>();
+                .As<INoteRepository>()
+                .SingleInstance();
             return builder;
         }
 

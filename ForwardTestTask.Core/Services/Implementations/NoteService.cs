@@ -18,7 +18,7 @@ namespace ForwardTestTask.Core.Services.Implementations
             Notes = _noteRepository.Notes;
         }
 
-        public IObservable<IEnumerable<Note>> Notes { get; }
+        public IObservable<IList<Note>> Notes { get; }
 
         public async Task<bool> AddAsync(AddNoteModel addNoteModel)
         {

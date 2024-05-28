@@ -2,7 +2,7 @@
 {
     public class Note
     {
-        public Guid Guid { get; init; }
+        public Guid Guid { get; init; } = Guid.NewGuid();
         public string Title { get; private set; }
         public string? Description { get; private set; }
         public DateTime CreatedDate { get; init; } = DateTime.Now;

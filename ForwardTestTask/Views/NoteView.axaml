@@ -9,4 +9,19 @@
 	<Design.DataContext>
 		<vm:NoteViewModel />
 	</Design.DataContext>
+	<ItemsControl  ItemsSource="{Binding Notes^}">
+		<ItemsControl.ItemTemplate>
+			<DataTemplate>
+				<DockPanel>
+					<TextBlock DockPanel.Dock="Top" Text="{Binding Title}"/>
+					<TextBlock DockPanel.Dock="Top" Text="{Binding Description}"/>
+					<TextBlock DockPanel.Dock="Top" Text="{Binding CreatedDate}"/>
+					<TextBlock DockPanel.Dock="Top" Text="{Binding EditedDate}"/>
+					<TextBlock DockPanel.Dock="Top" Text="{Binding Guid}"/>
+					<Button DockPanel.Dock="Top" Command="{Binding EditNoteCommand}">Edit</Button>
+					<Button DockPanel.Dock="Top" Command="{Binding $parent[ItemsControl].DataContext.DeleteNoteCommand}" CommandParameter="{Binding Guid}">Delete</Button>
+				</DockPanel>
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
+	</ItemsControl >
 </UserControl>
