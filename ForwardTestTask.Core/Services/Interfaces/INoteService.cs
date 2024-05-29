@@ -6,6 +6,6 @@ namespace ForwardTestTask.Core.Services.Interfaces
 {
     public interface INoteService : IEditable<EditNoteModel>, IDeletable<Guid>, IAddable<AddNoteModel>
     {
-        IObservable<IList<Note>> Notes { get; }
+        IObservable<IEnumerable<Note>> Notes { get; }
     }
 }

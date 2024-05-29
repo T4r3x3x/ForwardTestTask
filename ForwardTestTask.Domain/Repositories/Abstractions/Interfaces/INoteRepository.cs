@@ -5,6 +5,6 @@ namespace ForwardTestTask.Domain.Repositories.Abstraction.Interfaces
 {
     public interface INoteRepository : IAddable<Note>, IDeletable<Guid>, IEditable<EditNoteModel>
     {
-        IObservable<IList<Note>> Notes { get; }
+        IObservable<IEnumerable<Note>> Notes { get; }
     }
 }

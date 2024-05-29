@@ -15,14 +15,15 @@ namespace ForwardTestTask.Core.Services.Implementations
         public NoteService(INoteRepository noteRepository)
         {
             _noteRepository = noteRepository;
-            Notes = _noteRepository.Notes;
+            Notes = noteRepository.Notes;
         }
 
-        public IObservable<IList<Note>> Notes { get; }
+        public IObservable<IEnumerable<Note>> Notes { get; }
 
         public async Task<bool> AddAsync(AddNoteModel addNoteModel)
         {
-            var note = new Note(addNoteModel.Title, addNoteModel.Description);
+            //  var note = new Note(addNoteModel.Title, addNoteModel.Description);
+            var note = new Note("Погулять", "Погулять вечером");
             return await _noteRepository.AddAsync(note);
         }
 

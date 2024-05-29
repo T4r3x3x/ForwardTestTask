@@ -3,6 +3,7 @@
 using Avalonia;
 using Avalonia.Markup.Xaml;
 
+using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Presentation.Setup;
 using ForwardTestTask.ViewModels;
 using ForwardTestTask.Views;
@@ -21,8 +22,11 @@ public partial class App : Application
         var container = new ContainerBuilder()
          .RegisterDepedencies()
          .Build();
-        var wm = container.Resolve<NoteViewModel>();
-        new MainWindow { DataContext = wm }.Show();
+        var a = new MainWindow { };
+        //var wm = container.Resolve<NoteViewModel>();
+        var vm = new NoteViewModel(container.Resolve<INoteService>(), a);
+        a.DataContext = vm;
+        a.Show();
         base.OnFrameworkInitializationCompleted();
     }
 }

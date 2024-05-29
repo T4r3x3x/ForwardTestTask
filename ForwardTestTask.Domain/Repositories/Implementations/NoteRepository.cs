@@ -8,45 +8,46 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
 {
     public class NoteRepository : INoteRepository
     {
-        private readonly BehaviorSubject<IList<Note>> _notes = new([]);
-
-        public IObservable<IList<Note>> Notes { get; }
+        private readonly BehaviorSubject<LinkedList<Note>> _notesSubject = new([]);
 
         public NoteRepository()
         {
             SetData();
-            Notes = _notes;
         }
+
+        public IObservable<IEnumerable<Note>> Notes => _notesSubject;
+
 
         private void SetData()
         {
-            _notes.Value.Add(new Note("Погулять", "Погулять вечером"));
-            _notes.Value.Add(new Note("Поспать", "Поспать после прогулки"));
-            _notes.Value.Add(new Note("Поесть", "Поесть творог"));
+            _notesSubject.Value.AddLast(new Note("Погулять", "Погулять вечером"));
+            _notesSubject.Value.AddLast(new Note("Поспать", "Поспать после прогулки"));
+            _notesSubject.Value.AddLast(new Note("Поесть", "Поесть творог"));
+            _notesSubject.OnNext(_notesSubject.Value);
         }
 
         public Task<bool> AddAsync(Note note)
         {
-            _notes.Value.Add(note);
-            _notes.OnNext(_notes.Value);
+            _notesSubject.Value.AddLast(note);
+            _notesSubject.OnNext(_notesSubject.Value);
             return Task.FromResult(true);
         }
 
         public Task<bool> DeleteAsync(Guid guid)
         {
-            var note = _notes.Value
+            var note = _notesSubject.Value
                 .Single(x => x.Guid == guid);
-            _notes.Value.Remove(note);
-            _notes.OnNext(_notes.Value);
+            _notesSubject.Value.Remove(note);
+            _notesSubject.OnNext(_notesSubject.Value);
             return Task.FromResult(true);
         }
 
         public Task<bool> EditAsync(EditNoteModel editNoteModel)
         {
-            var note = _notes.Value
+            var note = _notesSubject.Value
                 .Single(x => x.Guid == editNoteModel.Guid);
             note.Edit(editNoteModel);
-            _notes.OnNext(_notes.Value);
+            _notesSubject.OnNext(_notesSubject.Value);
             return Task.FromResult(true);
         }
     }
