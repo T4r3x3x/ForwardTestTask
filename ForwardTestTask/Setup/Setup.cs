@@ -1,7 +1,6 @@
 ﻿using Autofac;
-
+using ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 using ForwardTestTask.Presentation.Setup.DI;
-using ForwardTestTask.ViewModels;
 using ForwardTestTask.Views;
 
 namespace ForwardTestTask.Presentation.Setup

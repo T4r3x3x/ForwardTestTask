@@ -4,8 +4,9 @@ using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Presentation.MessageBoxes;
 using ForwardTestTask.Presentation.Models;
-using ForwardTestTask.Presentation.ViewModels;
+using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 using ForwardTestTask.Presentation.Views;
+using ForwardTestTask.Presentation.Windows;
 
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -15,7 +16,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Threading.Tasks;
 
-namespace ForwardTestTask.ViewModels;
+namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 
 public class NoteViewModel : ViewModelBase
 {
@@ -33,23 +34,18 @@ public class NoteViewModel : ViewModelBase
         EditNoteCommand = ReactiveCommand.CreateFromTask<Note>(EditNote);
     }
 
-    #region Properties
-    [Reactive] public IEnumerable<Note> Notes { get; private set; }
+    [Reactive]
+    public IEnumerable<Note> Notes { get; private set; }
     public Window Window { get; }
-    #endregion
 
-    #region Commands
     public ReactiveCommand<Unit, Unit> AddNoteCommand { get; }
     public ReactiveCommand<Guid, Unit> DeleteNoteCommand { get; }
     public ReactiveCommand<Note, Unit> EditNoteCommand { get; }
-    #endregion
 
-    #region Methods
     private async Task AddNote()
     {
         var vm = new AddNoteViewModel();
-        var addNoteWindow = new AddNoteWindow() { DataContext = vm };
-        var addNoteModel = await addNoteWindow.ShowDialog<AddNoteModel?>(Window);
+        var addNoteModel = await WindowHelper.ShowDialogWindow<AddNoteModel, AddNoteViewModel, AddNoteWindow>(vm, Window);
 
         if (addNoteModel is null)
             return;
@@ -72,9 +68,9 @@ public class NoteViewModel : ViewModelBase
 
     private async Task EditNote(Note note)
     {
-        var vm = new EditNoteViewModel(new NoteDto(note.Guid, note.Title, note.Description));
-        var addNoteWindow = new EditNoteWindow() { DataContext = vm };
-        var editNoteModel = await addNoteWindow.ShowDialog<NoteDto?>(Window);
+        NoteDto? noteDto = new NoteDto(note);
+        var vm = new EditNoteViewModel(noteDto);
+        var editNoteModel = await WindowHelper.ShowDialogWindow<NoteDto, EditNoteViewModel, EditNoteWindow>(vm, Window);
 
         if (editNoteModel is null)
             return;
@@ -94,5 +90,4 @@ public class NoteViewModel : ViewModelBase
         Notes = null!;
         Notes = source;
     }
-    #endregion
 }

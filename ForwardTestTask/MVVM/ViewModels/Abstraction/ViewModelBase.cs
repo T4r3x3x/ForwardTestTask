@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace ForwardTestTask.ViewModels;
+namespace ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 
 public class ViewModelBase : ReactiveObject
 {

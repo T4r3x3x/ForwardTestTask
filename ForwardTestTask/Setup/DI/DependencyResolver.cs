@@ -6,7 +6,7 @@ using ForwardTestTask.Core.Services.Implementations;
 using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
 using ForwardTestTask.Domain.Repositories.Implementation;
-using ForwardTestTask.ViewModels;
+using ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 
 namespace ForwardTestTask.Presentation.Setup.DI
 {

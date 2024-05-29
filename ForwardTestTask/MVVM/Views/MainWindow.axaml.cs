@@ -1,15 +1,15 @@
 ﻿using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 
-using ForwardTestTask.ViewModels;
+using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 
 using ReactiveUI;
 
 namespace ForwardTestTask.Views;
 
-public partial class NoteView : ReactiveUserControl<NoteViewModel>
+public partial class MainWindow : ReactiveWindow<ViewModelBase>
 {
-    public NoteView()
+    public MainWindow()
     {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);

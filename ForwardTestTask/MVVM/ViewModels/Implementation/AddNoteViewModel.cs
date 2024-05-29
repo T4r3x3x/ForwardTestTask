@@ -1,23 +1,29 @@
 ﻿using ForwardTestTask.Presentation.Models;
-using ForwardTestTask.ViewModels;
+using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.Reactive;
+using System.Reactive.Subjects;
 
-namespace ForwardTestTask.Presentation.ViewModels
+namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
 {
-    public class AddNoteViewModel : ViewModelBase
+    public class AddNoteViewModel : ViewModelBase, IDialogViewModel<AddNoteModel>
     {
+        private readonly Subject<AddNoteModel?> _noteSubject = new();
+
         public AddNoteViewModel()
         {
+            DialogEnded = _noteSubject;
+
             AddNoteCommand = ReactiveCommand.Create(AddNote, CanAddNote);
             CancelCommand = ReactiveCommand.Create(Cancel);
         }
 
-        public event Action<AddNoteModel>? DialogEnded;
+        public IObservable<AddNoteModel?> DialogEnded { get; }
+
         [Reactive] public string? Title { get; set; }
         [Reactive] public string? Description { get; set; }
 
@@ -28,8 +34,8 @@ namespace ForwardTestTask.Presentation.ViewModels
             x => x.Title,
             x => !string.IsNullOrEmpty(x));
 
-        private void AddNote() => DialogEnded?.Invoke(new AddNoteModel(Title!, Description));
+        private void AddNote() => _noteSubject.OnNext(new AddNoteModel(Title!, Description));
 
-        private void Cancel() => DialogEnded?.Invoke(null!);
+        private void Cancel() => _noteSubject.OnNext(null!);
     }
 }

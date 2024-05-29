@@ -28,10 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\EditNoteWindow.axaml.cs">
+    <Compile Update="MVVM\Views\EditNoteWindow.axaml.cs">
       <DependentUpon>EditNoteWindow.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\NoteView.axaml.cs">
+    <Compile Update="MVVM\Views\NoteView.axaml.cs">
       <DependentUpon>NoteView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>

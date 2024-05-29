@@ -14,6 +14,14 @@
             Description = description;
         }
 
+        public Note(NoteDto dto)
+        {
+            Guid = dto.Guid;
+            Title = dto.Title;
+            Description = dto.Description;
+            CreatedDate = DateTime.Now;
+        }
+
         public void Edit(NoteDto editNoteModel)
         {
             Title = editNoteModel.Title;
