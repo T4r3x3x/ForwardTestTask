@@ -22,13 +22,12 @@ namespace ForwardTestTask.Core.Services.Implementations
 
         public async Task<bool> AddAsync(AddNoteModel addNoteModel)
         {
-            //  var note = new Note(addNoteModel.Title, addNoteModel.Description);
-            var note = new Note("Погулять", "Погулять вечером");
+            var note = new Note(addNoteModel.Title, addNoteModel.Description);
             return await _noteRepository.AddAsync(note);
         }
 
         public async Task<bool> DeleteAsync(Guid guid) => await _noteRepository.DeleteAsync(guid);
 
-        public async Task<bool> EditAsync(EditNoteModel editNoteModel) => await _noteRepository.EditAsync(editNoteModel);
+        public async Task<bool> EditAsync(NoteDto editNoteModel) => await _noteRepository.EditAsync(editNoteModel);
     }
 }

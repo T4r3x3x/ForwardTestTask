@@ -3,7 +3,7 @@
 using System;
 using System.Globalization;
 
-namespace ForwardTestTask.Presentation.Convertors
+namespace ForwardTestTask.Presentation.Converters
 {
     public class DateTimeConverter : IValueConverter
     {

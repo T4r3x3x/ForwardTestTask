@@ -4,7 +4,7 @@ using ForwardTestTask.ViewModels;
 
 using Splat;
 
-namespace ForwardTestTask.Presentation.Setup
+namespace ForwardTestTask.Presentation.Setup.DI
 {
     internal static class LocatorRegister
     {

@@ -1,19 +1,22 @@
 ﻿using Autofac;
 
+using Avalonia.Controls;
+
 using ForwardTestTask.Core.Services.Implementations;
 using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
 using ForwardTestTask.Domain.Repositories.Implementation;
 using ForwardTestTask.ViewModels;
 
-namespace ForwardTestTask.Presentation.Setup
+namespace ForwardTestTask.Presentation.Setup.DI
 {
     internal static class DependencyResolver
     {
-        internal static ContainerBuilder RegisterDepedencies(this ContainerBuilder builder)
+        internal static ContainerBuilder RegisterDepedencies(this ContainerBuilder builder, Window window)
             => builder.RegisterServices()
-                .RegisterRepositories()
-                .RegisterViewModels();
+            .RegisterRepositories()
+            .RegisterViewModels()
+            .RegisterWindow(window);
 
         internal static ContainerBuilder RegisterServices(this ContainerBuilder builder)
         {
@@ -27,6 +30,13 @@ namespace ForwardTestTask.Presentation.Setup
             builder.RegisterType<NoteRepository>()
                 .As<INoteRepository>()
                 .SingleInstance();
+            return builder;
+        }
+
+        internal static ContainerBuilder RegisterWindow(this ContainerBuilder builder, Window window)
+        {
+            builder.RegisterInstance(window)
+                .As<Window>();
             return builder;
         }
 

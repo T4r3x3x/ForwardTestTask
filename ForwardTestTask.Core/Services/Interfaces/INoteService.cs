@@ -4,7 +4,7 @@ using ForwardTestTask.Presentation.Models;
 
 namespace ForwardTestTask.Core.Services.Interfaces
 {
-    public interface INoteService : IEditable<EditNoteModel>, IDeletable<Guid>, IAddable<AddNoteModel>
+    public interface INoteService : IEditable<NoteDto>, IDeletable<Guid>, IAddable<AddNoteModel>
     {
         IObservable<IEnumerable<Note>> Notes { get; }
     }

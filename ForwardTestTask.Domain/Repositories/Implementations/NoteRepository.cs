@@ -17,12 +17,11 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
 
         public IObservable<IEnumerable<Note>> Notes => _notesSubject;
 
-
         private void SetData()
         {
             _notesSubject.Value.AddLast(new Note("Погулять", "Погулять вечером"));
             _notesSubject.Value.AddLast(new Note("Поспать", "Поспать после прогулки"));
-            _notesSubject.Value.AddLast(new Note("Поесть", "Поесть творог"));
+            _notesSubject.Value.AddLast(new Note("Поесть", "Поесть творог вместе с бананами и арасиховой пастой"));
             _notesSubject.OnNext(_notesSubject.Value);
         }
 
@@ -36,13 +35,17 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
         public Task<bool> DeleteAsync(Guid guid)
         {
             var note = _notesSubject.Value
-                .Single(x => x.Guid == guid);
+                .FirstOrDefault(x => x.Guid == guid);
+
+            if (note is null)
+                return Task.FromResult(false);
+
             _notesSubject.Value.Remove(note);
             _notesSubject.OnNext(_notesSubject.Value);
             return Task.FromResult(true);
         }
 
-        public Task<bool> EditAsync(EditNoteModel editNoteModel)
+        public Task<bool> EditAsync(NoteDto editNoteModel)
         {
             var note = _notesSubject.Value
                 .Single(x => x.Guid == editNoteModel.Guid);

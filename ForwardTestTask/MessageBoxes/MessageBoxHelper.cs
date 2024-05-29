@@ -9,10 +9,10 @@ namespace ForwardTestTask.Presentation.MessageBoxes
 {
     internal static class MessageBoxHelper
     {
-        internal static async Task ShowErrorMessageBoxAsync(string message)
+        internal static async Task ShowErrorMessageBoxAsync(Window window, string message)
         {
             var messageBox = MessageBoxManager.GetMessageBoxStandard("Error", message, ButtonEnum.Ok);
-            await messageBox.ShowAsync();
+            await messageBox.ShowWindowDialogAsync(window);
         }
 
         /// <summary>

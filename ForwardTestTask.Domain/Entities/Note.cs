@@ -14,7 +14,7 @@
             Description = description;
         }
 
-        public void Edit(EditNoteModel editNoteModel)
+        public void Edit(NoteDto editNoteModel)
         {
             Title = editNoteModel.Title;
             Description = editNoteModel.Description;
