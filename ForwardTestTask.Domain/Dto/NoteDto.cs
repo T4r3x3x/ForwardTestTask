@@ -1,4 +1,6 @@
-﻿namespace ForwardTestTask.Domain.Entities
+﻿using ForwardTestTask.Domain.Entities;
+
+namespace ForwardTestTask.Domain.Dto
 {
     public class NoteDto
     {

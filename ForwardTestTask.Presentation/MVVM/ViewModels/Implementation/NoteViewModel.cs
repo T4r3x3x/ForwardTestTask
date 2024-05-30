@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 
 using ForwardTestTask.Core.Services.Interfaces;
+using ForwardTestTask.Domain.Dto;
 using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Presentation.MessageBoxes;
 using ForwardTestTask.Presentation.Models;
@@ -35,7 +36,7 @@ public class NoteViewModel : ViewModelBase
     }
 
     [Reactive]
-    public IEnumerable<Note> Notes { get; private set; }
+    public IEnumerable<Note>? Notes { get; private set; }
     public Window Window { get; }
 
     public ReactiveCommand<Unit, Unit> AddNoteCommand { get; }
@@ -45,7 +46,7 @@ public class NoteViewModel : ViewModelBase
     private async Task AddNote()
     {
         var vm = new AddNoteViewModel();
-        var addNoteModel = await WindowHelper.ShowDialogWindow<AddNoteModel, AddNoteViewModel, AddNoteWindow>(vm, Window);
+        var addNoteModel = await DialogWindowHelper.ShowDialogWindow<AddNoteModel, AddNoteViewModel, AddNoteWindow>(vm, Window);
 
         if (addNoteModel is null)
             return;
@@ -70,7 +71,7 @@ public class NoteViewModel : ViewModelBase
     {
         NoteDto? noteDto = new NoteDto(note);
         var vm = new EditNoteViewModel(noteDto);
-        var editNoteModel = await WindowHelper.ShowDialogWindow<NoteDto, EditNoteViewModel, EditNoteWindow>(vm, Window);
+        var editNoteModel = await DialogWindowHelper.ShowDialogWindow<NoteDto, EditNoteViewModel, EditNoteWindow>(vm, Window);
 
         if (editNoteModel is null)
             return;

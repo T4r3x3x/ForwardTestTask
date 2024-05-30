@@ -14,6 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ForwardTestTask\ForwardTestTask.Presentation.csproj" />
+    <ProjectReference Include="..\ForwardTestTask.Presentation\ForwardTestTask.Presentation.csproj" />
   </ItemGroup>
 </Project>

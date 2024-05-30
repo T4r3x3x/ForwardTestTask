@@ -10,7 +10,7 @@ namespace ForwardTestTask.Presentation.Converters
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             var date = value as DateTime?;
-            return date.HasValue == false ? "Заметка не редактировалась" : date.ToString();
+            return date.HasValue == false ? "the note haven't edited" : date.Value.ToString("dd/MM/yyyy");
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

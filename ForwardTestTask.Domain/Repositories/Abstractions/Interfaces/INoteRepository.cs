@@ -1,4 +1,5 @@
-﻿using ForwardTestTask.Domain.Entities;
+﻿using ForwardTestTask.Domain.Dto;
+using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Domain.Repositories.Abstraction.Common;
 
 namespace ForwardTestTask.Domain.Repositories.Abstraction.Interfaces

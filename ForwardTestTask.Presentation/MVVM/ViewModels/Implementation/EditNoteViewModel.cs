@@ -1,4 +1,4 @@
-﻿using ForwardTestTask.Domain.Entities;
+﻿using ForwardTestTask.Domain.Dto;
 using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 
 using ReactiveUI;
@@ -12,12 +12,12 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
 {
     public class EditNoteViewModel : ViewModelBase, IDialogViewModel<NoteDto>
     {
-        private readonly NoteDto _noteDto;
+        private readonly Guid _guid;
         private readonly Subject<NoteDto> _noteSubject = new();
 
         public EditNoteViewModel(NoteDto noteDto)
         {
-            _noteDto = noteDto;
+            _guid = noteDto.Guid;
             Title = noteDto.Title;
             Description = noteDto.Description;
 
@@ -37,7 +37,7 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
             x => x.Title,
             x => !string.IsNullOrEmpty(x));
 
-        private void SaveChanges() => _noteSubject.OnNext(new(_noteDto.Guid, Title!, Description!));
+        private void SaveChanges() => _noteSubject.OnNext(new(_guid, Title!, Description!));
         private void Cancel() => _noteSubject.OnNext(null!);
     }
 }

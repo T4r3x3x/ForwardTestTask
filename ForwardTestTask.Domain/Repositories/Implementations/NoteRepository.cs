@@ -1,4 +1,5 @@
-﻿using ForwardTestTask.Domain.Entities;
+﻿using ForwardTestTask.Domain.Dto;
+using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
 
 using System.Reactive.Linq;
@@ -8,6 +9,7 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
 {
     public class NoteRepository : INoteRepository
     {
+        //можно и обычный лист использовать, но в целом такой будет поприкольнее: быстрее добавление и удаление
         private readonly BehaviorSubject<LinkedList<Note>> _notesSubject = new([]);
 
         public NoteRepository()

@@ -1,6 +1,5 @@
 using Avalonia.Markup.Xaml;
-
-using ForwardTestTask.Domain.Entities;
+using ForwardTestTask.Domain.Dto;
 using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
 using ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 

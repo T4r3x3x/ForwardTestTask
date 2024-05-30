@@ -1,4 +1,5 @@
 ﻿using ForwardTestTask.Core.Services.Interfaces;
+using ForwardTestTask.Domain.Dto;
 using ForwardTestTask.Domain.Entities;
 using ForwardTestTask.Domain.Repositories.Abstraction.Interfaces;
 using ForwardTestTask.Presentation.Models;

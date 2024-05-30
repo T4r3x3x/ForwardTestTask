@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForwardTestTask.Presentation", "ForwardTestTask\ForwardTestTask.Presentation.csproj", "{249287A9-9CC5-43BA-8557-BDB3C88F438E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForwardTestTask.Presentation", "ForwardTestTask.Presentation\ForwardTestTask.Presentation.csproj", "{249287A9-9CC5-43BA-8557-BDB3C88F438E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0AAC42E8-0E88-4473-A319-5057BF781812} = {0AAC42E8-0E88-4473-A319-5057BF781812}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForwardTestTask.Desktop", "ForwardTestTask.Desktop\ForwardTestTask.Desktop.csproj", "{E0ECBA7D-D889-4171-BF3B-D5E2FE287157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForwardTestTask.Domain", "ForwardTestTask.Domain\ForwardTestTask.Domain.csproj", "{0AAC42E8-0E88-4473-A319-5057BF781812}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForwardTestTask.Domain", "ForwardTestTask.Domain\ForwardTestTask.Domain.csproj", "{0AAC42E8-0E88-4473-A319-5057BF781812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForwardTestTask.Core", "ForwardTestTask.Core\ForwardTestTask.Core.csproj", "{C56837D6-3EC0-4510-8EB0-68317C1A145A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForwardTestTask.Core", "ForwardTestTask.Core\ForwardTestTask.Core.csproj", "{C56837D6-3EC0-4510-8EB0-68317C1A145A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0AAC42E8-0E88-4473-A319-5057BF781812} = {0AAC42E8-0E88-4473-A319-5057BF781812}
 	EndProjectSection
