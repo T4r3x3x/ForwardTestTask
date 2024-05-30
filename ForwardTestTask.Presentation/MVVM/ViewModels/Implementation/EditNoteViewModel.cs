@@ -28,8 +28,10 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
         }
         public IObservable<NoteDto?> DialogEnded { get; }
 
-        [Reactive] public string? Title { get; set; }
-        [Reactive] public string? Description { get; set; }
+        [Reactive]
+        public string? Title { get; set; }
+        [Reactive]
+        public string? Description { get; set; }
 
         public ReactiveCommand<Unit, Unit> SaveChangesCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }

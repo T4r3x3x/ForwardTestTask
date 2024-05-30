@@ -12,20 +12,7 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
         //можно и обычный лист использовать, но в целом такой будет поприкольнее: быстрее добавление и удаление
         private readonly BehaviorSubject<LinkedList<Note>> _notesSubject = new([]);
 
-        public NoteRepository()
-        {
-            SetData();
-        }
-
         public IObservable<IEnumerable<Note>> Notes => _notesSubject;
-
-        private void SetData()
-        {
-            _notesSubject.Value.AddLast(new Note("Погулять", "Погулять вечером"));
-            _notesSubject.Value.AddLast(new Note("Поспать", "Поспать после прогулки"));
-            _notesSubject.Value.AddLast(new Note("Поесть", "Поесть творог вместе с бананами и арасиховой пастой"));
-            _notesSubject.OnNext(_notesSubject.Value);
-        }
 
         public Task<bool> AddAsync(Note note)
         {
@@ -50,7 +37,11 @@ namespace ForwardTestTask.Domain.Repositories.Implementation
         public Task<bool> EditAsync(NoteDto editNoteModel)
         {
             var note = _notesSubject.Value
-                .Single(x => x.Guid == editNoteModel.Guid);
+                .FirstOrDefault(x => x.Guid == editNoteModel.Guid);
+
+            if (note is null)
+                return Task.FromResult(false);
+
             note.Edit(editNoteModel);
             _notesSubject.OnNext(_notesSubject.Value);
             return Task.FromResult(true);
