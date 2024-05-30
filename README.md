@@ -1,9 +1,5 @@
 ## Стек:
-AvaloniaUI
-
-ReactiveUI
-
-MVVM
+AvaloniaUI (ReactiveUI + MVVM)
 
 Нугеты:
 * Autofac
@@ -14,9 +10,8 @@ MVVM
 
 ForwardTestTask.Domain - data access layer 
 
-ForwardTestTask.Core - слой бизнес логики (которой нет) 
+ForwardTestTask.Core - слой бизнес логики
 
 ForwardTestTask.Presentation - слой, инкапсулирующий MVVM и иже с ним
 
-ForwardTestTask.Dekstop - проект сгенерированный авалонией для запуска под Windows
-
+ForwardTestTask.Dekstop - проект для запуска под Windows
