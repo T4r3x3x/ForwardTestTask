@@ -3,6 +3,7 @@
 using ForwardTestTask.Core.Services.Interfaces;
 using ForwardTestTask.Domain.Dto;
 using ForwardTestTask.Domain.Entities;
+using ForwardTestTask.Presentation.Factories.ViewModelFactories.Interfaces;
 using ForwardTestTask.Presentation.MessageBoxes;
 using ForwardTestTask.Presentation.Models;
 using ForwardTestTask.Presentation.MVVM.ViewModels.Abstraction;
@@ -22,11 +23,16 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 public class NoteViewModel : ViewModelBase
 {
     private readonly INoteService _noteService;
+    private readonly IViewModelFactory<AddNoteViewModel> _addNoteViewModelFactory;
+    private readonly IViewModelFactory<EditNoteViewModel> _editNoteViewModelFactory;
 
-    public NoteViewModel(INoteService noteService, Window window)
+    public NoteViewModel(INoteService noteService, Window window,
+        IViewModelFactory<AddNoteViewModel> addNoteViewModelFactory, IViewModelFactory<EditNoteViewModel> editNoteViewModelFactory)
     {
         _noteService = noteService;
         _noteService.Notes.Subscribe(UpdateCollection);
+        _addNoteViewModelFactory = addNoteViewModelFactory;
+        _editNoteViewModelFactory = editNoteViewModelFactory;
 
         Window = window;
 
@@ -45,7 +51,7 @@ public class NoteViewModel : ViewModelBase
 
     private async Task AddNote()
     {
-        var vm = new AddNoteViewModel();
+        var vm = _addNoteViewModelFactory.GetViewModel();
         var addNoteModel = await DialogWindowHelper.ShowDialogWindow<AddNoteModel, AddNoteViewModel, AddNoteWindow>(vm, Window);
 
         if (addNoteModel is null)
@@ -69,8 +75,8 @@ public class NoteViewModel : ViewModelBase
 
     private async Task EditNote(Note note)
     {
-        NoteDto? noteDto = new NoteDto(note);
-        var vm = new EditNoteViewModel(noteDto);
+        var vm = _editNoteViewModelFactory.GetViewModel();
+        vm.SetNoteDto(new NoteDto(note));
         var editNoteModel = await DialogWindowHelper.ShowDialogWindow<NoteDto, EditNoteViewModel, EditNoteWindow>(vm, Window);
 
         if (editNoteModel is null)

@@ -1,4 +1,6 @@
 ﻿using Autofac;
+
+using ForwardTestTask.Presentation.Factories.ViewModelFactories.Interfaces;
 using ForwardTestTask.Presentation.MVVM.ViewModels.Implementation;
 using ForwardTestTask.Presentation.Setup.DI;
 using ForwardTestTask.Views;
@@ -14,8 +16,8 @@ namespace ForwardTestTask.Presentation.Setup
              .RegisterDepedencies(window)
              .Build();
 
-            var noteVM = container.Resolve<NoteViewModel>();
-            window.DataContext = noteVM;
+            var factory = container.Resolve<IViewModelFactory<NoteViewModel>>();
+            window.DataContext = factory.GetViewModel();
             window.Show();
         }
     }

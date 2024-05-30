@@ -12,20 +12,16 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
 {
     public class EditNoteViewModel : ViewModelBase, IDialogViewModel<NoteDto>
     {
-        private readonly Guid _guid;
+        private Guid _guid;
         private readonly Subject<NoteDto> _noteSubject = new();
 
-        public EditNoteViewModel(NoteDto noteDto)
+        public EditNoteViewModel()
         {
-            _guid = noteDto.Guid;
-            Title = noteDto.Title;
-            Description = noteDto.Description;
-
             SaveChangesCommand = ReactiveCommand.Create(SaveChanges, CanSaveChanges);
             CancelCommand = ReactiveCommand.Create(Cancel);
             DialogEnded = _noteSubject;
-
         }
+
         public IObservable<NoteDto?> DialogEnded { get; }
 
         [Reactive]
@@ -38,6 +34,13 @@ namespace ForwardTestTask.Presentation.MVVM.ViewModels.Implementation
         private IObservable<bool> CanSaveChanges => this.WhenAnyValue(
             x => x.Title,
             x => !string.IsNullOrEmpty(x));
+
+        public void SetNoteDto(NoteDto noteDto)
+        {
+            _guid = noteDto.Guid;
+            Title = noteDto.Title;
+            Description = noteDto.Description;
+        }
 
         private void SaveChanges() => _noteSubject.OnNext(new(_guid, Title!, Description!));
         private void Cancel() => _noteSubject.OnNext(null!);
